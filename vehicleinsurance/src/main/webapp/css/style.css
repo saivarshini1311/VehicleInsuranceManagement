@@ -1,0 +1,14 @@
+@charset "UTF-8";
+body {
+    font-family: 'Segoe UI', sans-serif;
+}
+
+h1, h2 {
+    color: #004080;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+}
