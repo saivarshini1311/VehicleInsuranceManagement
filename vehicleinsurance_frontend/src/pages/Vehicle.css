@@ -1,0 +1,28 @@
+.vehicle-container {
+  padding: 20px;
+}
+
+.vehicle-form input,
+.vehicle-form select {
+  display: block;
+  margin-bottom: 10px;
+  padding: 8px;
+  width: 300px;
+}
+
+.vehicle-card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px 0;
+  background-color: #f8f8f8;
+}
+
+.vehicle-card h4 {
+  margin-top: 0;
+}
+
+.actions button {
+  margin-right: 10px;
+  margin-top: 10px;
+}

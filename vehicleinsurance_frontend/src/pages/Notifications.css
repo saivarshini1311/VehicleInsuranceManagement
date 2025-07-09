@@ -1,0 +1,79 @@
+.notifications-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  background: #fefefe;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.notifications-container h2 {
+  margin-bottom: 20px;
+  color: #2e4a62;
+}
+
+.no-notify {
+  color: #666;
+  text-align: center;
+  font-style: italic;
+}
+
+.notifications-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.notify-item {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 10px;
+  background: #fafafa;
+  transition: 0.3s;
+}
+
+.notify-item:hover {
+  background: #f1f8ff;
+}
+
+.notify-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.notify-type {
+  font-weight: 600;
+  color: #0078d4;
+}
+
+.notify-date {
+  font-size: 12px;
+  color: #888;
+}
+
+.notify-msg {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Color customizations based on notification type */
+.notify-item.policy-expiry .notify-type {
+  color: #d9534f;
+}
+.notify-item.premium-due .notify-type {
+  color: #f0ad4e;
+}
+.notify-item.quote-expiry .notify-type {
+  color: #5bc0de;
+}
+.notify-item.claim-approved .notify-type {
+  color: #5cb85c;
+}
+.notify-item.new-quote-available .notify-type {
+  color: #337ab7;
+}

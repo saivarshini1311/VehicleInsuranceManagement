@@ -1,0 +1,96 @@
+.claims-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  background: #fefefe;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+h2 {
+  color: #2e4a62;
+  margin-bottom: 20px;
+}
+
+.claim-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.claim-form label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  color: #333;
+}
+
+.claim-form input,
+.claim-form select,
+.claim-form textarea {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+}
+
+.claim-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.claim-form button {
+  padding: 12px;
+  background: #0078d4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.claim-form button:hover {
+  background: #005fa3;
+}
+
+.claim-history {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.claim-history th,
+.claim-history td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+.claim-history th {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+.status {
+  font-weight: bold;
+}
+
+.status.under-review {
+  color: orange;
+}
+
+.status.approved {
+  color: green;
+}
+
+.status.rejected {
+  color: red;
+}
+
+.status.settled {
+  color: blue;
+}
