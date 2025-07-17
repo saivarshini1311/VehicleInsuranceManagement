@@ -6,6 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
   font-family: 'Segoe UI', sans-serif;
 }
 
@@ -68,9 +69,30 @@
   margin-bottom: 1rem;
   text-align: center;
 }
+/* Fix navbar and form stacking */
+.auth-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.auth-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 @keyframes gradientBG {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+.success-msg {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
 }

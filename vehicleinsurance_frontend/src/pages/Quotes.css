@@ -67,3 +67,27 @@
   background-color: #48bb78; /* green for download */
   color: white;
 }
+.status.unpaid {
+  color: red;
+  font-weight: bold;
+}
+
+.status.paid {
+  color: green;
+  font-weight: bold;
+}
+
+.pay-now-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 4px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.pay-now-button:hover {
+  background-color: #0056b3;
+}

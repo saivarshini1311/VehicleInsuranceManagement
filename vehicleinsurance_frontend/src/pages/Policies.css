@@ -60,3 +60,9 @@
 .policy-actions button:last-child {
   background-color: #48bb78;
 }
+
+.user-info {
+  margin-top: 10px;
+  font-style: italic;
+  color: #444;
+}

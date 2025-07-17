@@ -6,7 +6,6 @@ export default function UserProfile() {
   const [user, setUser] = useState({});
   const [editing, setEditing] = useState(false);
   const [passwords, setPasswords] = useState({ current: '', new: '', confirm: '' });
-  const [avatar, setAvatar] = useState(null);
 
   const userId = localStorage.getItem('userId');
   const token = localStorage.getItem('token');
@@ -38,48 +37,9 @@ export default function UserProfile() {
     }).then(() => alert("Password updated"));
   };
 
-  const handleAvatarChange = (e) => {
-  const file = e.target.files[0];
-  setAvatar(file);
-
-  const formData = new FormData();
-  formData.append("avatar", file);
-
-  axios.post(`${BASE_URL}/api/users/${userId}/avatar`, formData, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'multipart/form-data',
-    },
-  })
-  .then(() => {
-    alert("Profile photo updated");
-    // Refetch updated user info to get new avatarUrl
-    return axios.get(`${BASE_URL}/api/users/${userId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-  })
-  .then(res => {
-    setUser(res.data); // Update user state with new avatar URL
-  })
-  .catch(err => {
-    console.error("Avatar upload failed", err);
-  });
-};
-
-
   return (
     <div className="profile-container">
       <h2>My Profile</h2>
-
-      {/* Profile Photo Upload */}
-      <div className="avatar-section">
-        <img
-          src={user.avatarUrl ? `http://localhost:8080${user.avatarUrl}` : '/default-avatar.png'}
-          alt="Avatar"
-          className="avatar-img"
-        />
-        <input type="file" accept="image/*" onChange={handleAvatarChange} />
-      </div>
 
       {/* Profile Fields */}
       <div className="profile-grid">

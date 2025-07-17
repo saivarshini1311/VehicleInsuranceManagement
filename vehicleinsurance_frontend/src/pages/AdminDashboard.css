@@ -1,0 +1,188 @@
+.admin-container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.proposal-list {
+  margin-top: 20px;
+}
+
+.proposal-card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.approve-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reject-btn {
+  background-color: #f44336;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.rejection-input {
+  padding: 6px;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.quote-list {
+  margin-top: 20px;
+}
+
+.quote-card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  background-color: #fffef9;
+}
+
+.premium-input {
+  padding: 6px;
+  width: 120px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.policy-list {
+  margin-top: 20px;
+}
+
+.policy-card {
+  border: 1px solid #ddd;
+  padding: 16px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  background-color: #f7fcff;
+}
+
+.claim-card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  background-color: #fff6f4;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}
+
+.neutral-btn {
+  background-color: #ffc107;
+  color: black;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.vehicle-card {
+  border: 1px solid #bbb;
+  padding: 16px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  background-color: #f3fff2;
+}
+
+.edit-form input {
+  padding: 6px;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.user-card {
+  border: 1px solid #ccc;
+  background-color: #f5f7ff;
+  padding: 16px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
+
+.edit-form input {
+  margin: 5px;
+  padding: 6px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+.document-card {
+  border: 1px solid #ddd;
+  background-color: #fefaf0;
+  padding: 16px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
+
+.actions {
+  margin-top: 0.5rem;
+}
+
+.actions button {
+  margin-right: 0.5rem;
+  padding: 6px 12px;
+  border: none;
+  background-color: #2980b9;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.actions button:hover {
+  background-color: #1f6391;
+}
+
+.search-box {
+  padding: 8px;
+  margin-left: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.filters {
+  margin-bottom: 1rem;
+}
+
+.premium-input {
+  width: 120px;
+  padding: 5px;
+  margin-right: 10px;
+}
+

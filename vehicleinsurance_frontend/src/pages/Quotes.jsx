@@ -16,12 +16,11 @@ export default function Quotes() {
     axios.get(`${BASE_URL}/api/quotes/user/${userId}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
-    .then(res => setQuotes(res.data))
-    .catch(err => console.error("Error fetching quotes:", err));
+      .then(res => setQuotes(res.data))
+      .catch(err => console.error("Error fetching quotes:", err));
   };
 
   const handlePay = (quoteId) => {
-    // Redirect to payment page
     window.location.href = `/payment/quote/${quoteId}`;
   };
 
@@ -38,17 +37,38 @@ export default function Quotes() {
       ) : (
         quotes.map((q) => (
           <div key={q.id} className="quote-card">
-            <h3>{q.vehicle?.registrationNumber} - {q.vehicle?.brand} {q.vehicle?.model}</h3>
-            <p><strong>Premium:</strong> ₹{q.premiumAmount}</p>
-            <p><strong>Duration:</strong> {q.coverageDuration} months</p>
-            <p><strong>Conditions:</strong> {q.conditions}</p>
-            <p><strong>Status:</strong> <span className={`status ${q.paid ? 'paid' : 'unpaid'}`}>{q.paid ? 'Paid' : 'Unpaid'}</span></p>
+            <h3>
+              {q.vehicle?.registrationNumber ? `${q.vehicle.registrationNumber} - ` : ""}
+              {q.vehicle?.brand} {q.vehicle?.model}
+            </h3>
 
-            {!q.paid ? (
-              <button onClick={() => handlePay(q.id)}>💳 Accept & Pay</button>
-            ) : (
-              <button onClick={() => handleDownloadReceipt(q.paymentId)}>📥 Download Receipt</button>
+            <p><strong>Premium:</strong> ₹{q.premiumAmount}</p>
+            <p><strong>Duration:</strong> {q.coverageDuration || "1"} month</p>
+            <p><strong>Conditions:</strong> {q.conditions || "Standard conditions apply."}</p>
+            <p><strong>Status:</strong>
+              <span className={`status ${q.status === 'PAID' ? 'paid' : 'unpaid'}`}>
+                {q.status === 'PAID' ? 'Paid' : 'Unpaid'}
+              </span>
+            </p>
+
+            {(q.status === 'UNPAID' || q.status === 'PENDING_PAYMENT') && (
+              <button className="pay-now-button" onClick={() => handlePay(q.id)}>
+                Pay Now
+              </button>
             )}
+
+            {q.status === 'PAID' && q.payment?.id && (
+              <button className="receipt-button" onClick={() => handleDownloadReceipt(q.payment.id)}>
+                Download Receipt
+              </button>
+            )}
+
+            <button
+              className="details-button"
+              onClick={() => window.location.href = `/user-dashboard/quote/view/${q.id}`}
+            >
+              View Details
+            </button>
           </div>
         ))
       )}

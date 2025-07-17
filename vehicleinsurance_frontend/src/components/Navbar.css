@@ -1,0 +1,76 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(270deg, #007cf0, #00dfd8);
+  background-size: 400% 400%;
+  animation: gradientBG 10s ease infinite;
+  padding: 5px 10px;
+}
+
+.navbar-left{
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 8px;
+}
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Common button style */
+.auth-button {
+  padding: 8px 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+/* Yellow register/login buttons */
+.yellow-button {
+  background-color: #ffcc00;
+  color: black;
+  transition: background-color 0.3s ease;
+}
+
+.yellow-button:hover {
+  background-color: #e6b800;
+}
+
+/* Red logout button */
+.red-button {
+  background-color: #ff4d4d;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.red-button:hover {
+  background-color: #cc0000;
+}
+
+.navbar-logo {
+  height: 80px;        /* smaller height */
+  width: auto;
+  object-fit: contain;
+}
+
+.navbar-slogan {
+  color: white;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;     /* limits width */
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

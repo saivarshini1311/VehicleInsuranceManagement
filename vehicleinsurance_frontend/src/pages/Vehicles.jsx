@@ -134,12 +134,13 @@ export default function Vehicle() {
               <p><strong>Reg No:</strong> {v.registrationNumber}</p>
               <p><strong>Status:</strong> {getStatus(v)}</p>
               <div className="actions">
-                <button onClick={() => window.location.href = `/proposal/submit/${v.id}`}>Submit Proposal</button>
                 <button onClick={() => window.location.href = `/policy/view/${v.id}`}>View Policy</button>
-                <button onClick={() => window.location.href = `/claim/submit/${v.id}`}>Submit Claim</button>
+                <button onClick={() => window.location.href = `/user-dashboard/proposals`}>Submit Proposal</button>
+                <button onClick={() => window.location.href = `/user-dashboard/claims`}>Submit Claim</button>
                 <button onClick={() => handleEditVehicle(v)}>Edit</button>
                 <button onClick={() => handleDeleteVehicle(v.id)}>Delete</button>
               </div>
+
             </div>
           ))
         )}

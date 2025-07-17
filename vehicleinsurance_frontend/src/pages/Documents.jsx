@@ -1,43 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './Documents.css';
 
 export default function Documents() {
-  const [documents, setDocuments] = useState([
-    {
-      name: 'Aadhaar Card',
-      type: 'Identity',
-      uploadedDate: '2025-07-01',
-      status: 'Verified',
-      url: '/docs/aadhaar.pdf',
-    },
-    {
-      name: 'RC Book',
-      type: 'Vehicle',
-      uploadedDate: '2025-07-03',
-      status: 'Pending',
-      url: '/docs/rc.pdf',
-    },
-    {
-      name: 'Policy Document',
-      type: 'Insurance',
-      uploadedDate: '2025-07-05',
-      status: 'Verified',
-      url: '/docs/policy.pdf',
-    },
-    {
-      name: 'FIR Copy',
-      type: 'Claim',
-      uploadedDate: '2025-07-06',
-      status: 'Rejected',
-      url: '/docs/fir.pdf',
-    },
-  ]);
-
+  const userId = localStorage.getItem('userId');
+  const [documents, setDocuments] = useState([]);
   const [uploadForm, setUploadForm] = useState({
     name: '',
     type: '',
     file: null,
   });
+
+  const [editingDocId, setEditingDocId] = useState(null);
+  const [editedData, setEditedData] = useState({
+    type: '',
+    status: '',
+  });
+
+  const fetchDocuments = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/documents/user/${userId}`);
+      setDocuments(response.data);
+    } catch (error) {
+      console.error('Error fetching documents:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchDocuments();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -47,26 +38,71 @@ export default function Documents() {
     }));
   };
 
-  const handleUpload = (e) => {
+  const handleUpload = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem('token');
+    const formData = new FormData();
+    formData.append('name', uploadForm.name);
+    formData.append('type', uploadForm.type);
+    formData.append('file', uploadForm.file);
+    formData.append('userId', userId);
 
-    if (!uploadForm.name || !uploadForm.type || !uploadForm.file) {
-      alert('Please fill in all fields.');
-      return;
+    try {
+      await axios.post('http://localhost:8080/api/documents/upload', formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      alert('Document uploaded successfully!');
+      fetchDocuments();
+      setUploadForm({ name: '', type: '', file: null });
+    } catch (error) {
+      console.error('Upload failed:', error.response?.data || error.message);
+      alert('Upload failed!');
     }
+  };
 
-    const newDoc = {
-      name: uploadForm.name,
-      type: uploadForm.type,
-      uploadedDate: new Date().toISOString().slice(0, 10),
-      status: 'Pending',
-      url: URL.createObjectURL(uploadForm.file), // for demo only
-    };
+  const handleDelete = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this document?')) return;
+    try {
+      await axios.delete(`http://localhost:8080/api/documents/${id}`);
+      alert('Deleted successfully');
+      fetchDocuments();
+    } catch (error) {
+      console.error('Delete failed:', error);
+      alert('Delete failed!');
+    }
+  };
 
-    setDocuments([...documents, newDoc]);
-    setUploadForm({ name: '', type: '', file: null });
+  const handleEditClick = (doc) => {
+    setEditingDocId(doc.id);
+    setEditedData({
+      type: doc.type || '',
+      status: doc.status || '',
+    });
+  };
 
-    alert('Document uploaded successfully!');
+  const handleEditChange = (e) => {
+    const { name, value } = e.target;
+    setEditedData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleEditSave = async (id) => {
+    try {
+      await axios.put(`http://localhost:8080/api/documents/${id}`, editedData);
+      alert('Document updated successfully!');
+      setEditingDocId(null);
+      fetchDocuments();
+    } catch (error) {
+      console.error('Update failed:', error);
+      alert('Update failed!');
+    }
+  };
+
+  const handleEditCancel = () => {
+    setEditingDocId(null);
+    setEditedData({ type: '', status: '' });
   };
 
   return (
@@ -79,15 +115,15 @@ export default function Documents() {
           name="name"
           value={uploadForm.name}
           onChange={handleChange}
-          placeholder="Document Name (e.g., PAN Card)"
+          placeholder="Document Name"
           required
         />
         <select name="type" value={uploadForm.type} onChange={handleChange} required>
           <option value="">Select Category</option>
-          <option value="Identity">Proof of Identity</option>
-          <option value="Vehicle">Vehicle Document</option>
-          <option value="Insurance">Insurance Document</option>
-          <option value="Claim">Claim Document</option>
+          <option value="Identity">Identity</option>
+          <option value="Vehicle">Vehicle</option>
+          <option value="Insurance">Insurance</option>
+          <option value="Claim">Claim</option>
         </select>
         <input
           type="file"
@@ -102,30 +138,64 @@ export default function Documents() {
       <table className="documents-table">
         <thead>
           <tr>
-            <th>Document Name</th>
+            <th>Name</th>
             <th>Type</th>
-            <th>Uploaded Date</th>
+            <th>Date</th>
             <th>Status</th>
-            <th>Download</th>
+            <th>View</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {documents.map((doc, index) => (
-            <tr key={index}>
-              <td>{doc.name}</td>
-              <td>{doc.type}</td>
-              <td>{doc.uploadedDate}</td>
-              <td className={`status ${doc.status.toLowerCase()}`}>{doc.status}</td>
-              <td>
-                <a href={doc.url} target="_blank" rel="noopener noreferrer" className="download-btn">View</a>
-              </td>
-              <td>
-                <button className="action-btn">Replace</button>
-                <button className="action-btn delete">Delete</button>
-              </td>
-            </tr>
-          ))}
+          {documents.length === 0 ? (
+            <tr><td colSpan="6">No documents found.</td></tr>
+          ) : (
+            documents.map((doc) => (
+              <tr key={doc.id}>
+                <td>{doc.name || 'N/A'}</td>
+                <td>
+                  {editingDocId === doc.id ? (
+                    <select name="type" value={editedData.type} onChange={handleEditChange}>
+                      <option value="Identity">Identity</option>
+                      <option value="Vehicle">Vehicle</option>
+                      <option value="Insurance">Insurance</option>
+                      <option value="Claim">Claim</option>
+                    </select>
+                  ) : (
+                    doc.type || 'N/A'
+                  )}
+                </td>
+                <td>{doc.uploadDate || 'N/A'}</td>
+                <td className={`status ${doc.status ? doc.status.toLowerCase() : 'unknown'}`}>
+                  {doc.status || 'Unknown'}
+                </td>
+
+                <td>
+                  <a
+                    href={doc.fileUrl || `http://localhost:8080/api/documents/download/${doc.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="download-btn"
+                  >
+                    View
+                  </a>
+                </td>
+                <td>
+                  {editingDocId === doc.id ? (
+                    <>
+                      <button className="action-btn save" onClick={() => handleEditSave(doc.id)}>Save</button>
+                      <button className="action-btn cancel" onClick={handleEditCancel}>Cancel</button>
+                    </>
+                  ) : (
+                    <>
+                      <button className="action-btn edit" onClick={() => handleEditClick(doc)}>Edit</button>
+                      <button className="action-btn delete" onClick={() => handleDelete(doc.id)}>Delete</button>
+                    </>
+                  )}
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>

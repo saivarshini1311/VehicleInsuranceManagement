@@ -28,7 +28,7 @@ function Home() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.2 }}
       >
-        <img src="https://img.freepik.com/free-vector/car-insurance-concept-illustration_114360-7857.jpg" alt="Vehicle Insurance" />
+        <img src="/assets/Motor_insurance.jpg" alt="Vehicle Insurance" />
       </motion.div>
     </div>
   );

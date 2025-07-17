@@ -1,56 +1,71 @@
-/* UserDashboard.css */
-
+/* Layout Wrapper */
 .dashboard-wrapper {
   display: flex;
-  height: 100vh;
-  width: 100%;
   font-family: 'Segoe UI', sans-serif;
-  background-color: #f9f9f9;
+  background-color: #f2f2f2;
+  height: 100vh;
   overflow: hidden;
   position: relative;
 }
 
-.menu-toggle {
-  position: absolute;
+/* Menu Toggle (Floating on Top Left) */
+.menu-toggle-container {
+  position: fixed;
   top: 1rem;
   left: 1rem;
-  background: none;
-  border: none;
-  font-size: 1.8rem;
-  z-index: 1000;
-  color: #333;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
   cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  transition: color 0.3s ease;
 }
 
+.menu-toggle-container.black {
+  color: black;
+  background: transparent;
+}
+
+.menu-toggle-container.white {
+  color: white;
+  background-color: #1a1a1a;
+}
+
+.menu-toggle-container .menu-label {
+  margin-left: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Sidebar */
 .sidebar {
   width: 240px;
   background-color: #1a1a1a;
-  color: white;
   padding: 2rem 1rem;
-  display: flex;
-  flex-direction: column;
-  position: absolute;
+  position: fixed;
+  top: 0;
   left: -240px;
-  height: 100vh;
-  transition: left 0.3s ease;
-  z-index: 999;
+  height: 100%;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
 }
 
 .sidebar.open {
   left: 0;
+  visibility: visible;
+  opacity: 1;
 }
 
-.sidebar h2 {
-  font-size: 1.6rem;
-  margin-bottom: 2rem;
-  text-align: center;
-}
 
 .sidebar nav a {
+  display: block;
   color: #ddd;
   text-decoration: none;
   margin: 0.8rem 0;
-  display: block;
   padding: 0.5rem 1rem;
   border-radius: 6px;
   transition: background 0.3s ease;
@@ -60,26 +75,35 @@
   background-color: #333;
   color: #fff;
 }
+.sidebar-header {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: white;
+  padding: 0 1rem;
+  margin-bottom: 1.5rem;
+}
 
+/* Main Dashboard Content */
 .dashboard-content {
   flex: 1;
   padding: 2rem 3rem;
   overflow-y: auto;
-  margin-left: 240px;
   transition: margin-left 0.3s ease;
-}
-
-.sidebar:not(.open) ~ .dashboard-content {
   margin-left: 0;
 }
 
+.dashboard-content.with-sidebar {
+  margin-left: 240px;
+}
+
+/* Welcome Banner */
 .welcome-banner {
   text-align: center;
   margin-bottom: 3rem;
 }
 
 .welcome-banner h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #222;
 }
 
@@ -90,6 +114,7 @@
   margin: 1rem auto;
 }
 
+/* Features */
 .features {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -102,8 +127,8 @@
   border-radius: 10px;
   padding: 1.5rem;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: transform 0.3s;
   text-align: left;
+  transition: transform 0.3s;
 }
 
 .feature-card:hover {
@@ -120,24 +145,41 @@
   color: #555;
 }
 
+/* Nested Route Content */
 .nested-content {
   margin-top: 2rem;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
   .dashboard-wrapper {
     flex-direction: column;
   }
 
-  .sidebar {
-    position: fixed;
-    top: 0;
-    height: 100%;
-    z-index: 1000;
+  .dashboard-content.with-sidebar {
+    margin-left: 0;
   }
 
-  .dashboard-content {
-    margin-left: 0;
-    padding: 1rem;
+  .menu-toggle-container {
+    top: 0.8rem;
+    left: 0.8rem;
   }
+}
+
+.logout-button {
+  background-color: #ff4d4d;
+  border: none;
+  color: white;
+  padding: 10px 14px;
+  margin-top: 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #e60000;
 }
