@@ -3,13 +3,16 @@ package com.hexaware.vehicleinsurance.dto;
 import java.time.LocalDate;
 
 public class PaymentDTO {
+
     private Double amount;
     private String paymentMethod;
     private String status;
     private String transactionId;
     private LocalDate paymentDate;
+
     private Long userId;
     private Long policyId;
+    private Long quoteId; // NEW
 
     public Double getAmount() { return amount; }
     public void setAmount(Double amount) { this.amount = amount; }
@@ -31,4 +34,7 @@ public class PaymentDTO {
 
     public Long getPolicyId() { return policyId; }
     public void setPolicyId(Long policyId) { this.policyId = policyId; }
+
+    public Long getQuoteId() { return quoteId; }
+    public void setQuoteId(Long quoteId) { this.quoteId = quoteId; }
 }

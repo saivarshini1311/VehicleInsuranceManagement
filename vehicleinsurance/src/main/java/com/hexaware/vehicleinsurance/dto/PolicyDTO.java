@@ -1,14 +1,30 @@
 package com.hexaware.vehicleinsurance.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDate;
+
 public class PolicyDTO {
+
     private String policyNumber;
-    private String startDate;
-    private String endDate;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate startDate;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate endDate;
+
     private double premiumAmount;
     private String status;
     private Long userId;
     private Long vehicleId;
-    private String createdDate;
+    private Long id;
+    private String registrationNumber;
+    private String brand;
+    private String model;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate createdDate;
+
     private String coverageDetails;
 
     // Getters and Setters
@@ -21,19 +37,19 @@ public class PolicyDTO {
         this.policyNumber = policyNumber;
     }
 
-    public String getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
@@ -69,11 +85,11 @@ public class PolicyDTO {
         this.vehicleId = vehicleId;
     }
 
-    public String getCreatedDate() {
+    public LocalDate getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(String createdDate) {
+    public void setCreatedDate(LocalDate createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -84,4 +100,31 @@ public class PolicyDTO {
     public void setCoverageDetails(String coverageDetails) {
         this.coverageDetails = coverageDetails;
     }
+    
+    public String getRegistrationNumber() {
+        return registrationNumber;
+    }
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
+    }
+    public String getBrand() {
+        return brand;
+    }
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+    public String getModel() {
+        return model;
+    }
+    public void setModel(String model) {
+        this.model = model;
+    }
+    
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }

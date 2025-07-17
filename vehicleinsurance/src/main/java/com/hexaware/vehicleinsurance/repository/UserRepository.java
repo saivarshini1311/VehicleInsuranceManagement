@@ -6,5 +6,6 @@ import com.hexaware.vehicleinsurance.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
+    Optional<User> findByAddress(String address);
 }
 

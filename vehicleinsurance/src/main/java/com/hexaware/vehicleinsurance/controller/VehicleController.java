@@ -30,9 +30,39 @@ public class VehicleController {
         return ResponseEntity.ok(saved);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Vehicle> getVehicleById(@PathVariable Long id) {
+        Vehicle vehicle = vehicleService.getVehicleById(id);
+        return ResponseEntity.ok(vehicle);
+    }
+
     @GetMapping("/owner/{ownerId}")
     public ResponseEntity<List<Vehicle>> getVehiclesByOwner(@PathVariable Long ownerId) {
         List<Vehicle> vehicles = vehicleService.getVehiclesByOwnerId(ownerId);
         return ResponseEntity.ok(vehicles);
     }
+
+    @GetMapping
+    public ResponseEntity<List<Vehicle>> getAllVehicles() {
+        List<Vehicle> vehicles = vehicleService.getAllVehicles();
+        return ResponseEntity.ok(vehicles);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Vehicle> updateVehicle(@PathVariable Long id, @RequestBody VehicleDTO dto) {
+        Vehicle updated = vehicleService.updateVehicle(id, dto);
+        return ResponseEntity.ok(updated);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteVehicle(@PathVariable Long id) {
+        vehicleService.deleteVehicle(id);
+        return ResponseEntity.ok("Vehicle deleted successfully.");
+    }
+    
+    @GetMapping("/all")
+    public ResponseEntity<List<VehicleDTO>> getAllVehicleDetails() {
+        return ResponseEntity.ok(vehicleService.getAllVehicleDetails());
+    }
+
 }

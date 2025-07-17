@@ -15,7 +15,7 @@ public class Document {
     @Lob
     @Column(name = "file_data", columnDefinition = "LONGBLOB")
     private byte[] fileData;
-
+    private String status;
     private LocalDate uploadDate;
     private Long userId;
     private Long policyId;
@@ -44,4 +44,7 @@ public class Document {
 
     public Long getVehicleId() { return vehicleId; }
     public void setVehicleId(Long vehicleId) { this.vehicleId = vehicleId; }
+    
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }

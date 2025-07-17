@@ -15,9 +15,8 @@ public class User {
     private String dob;
     private String aadharNumber;
     private String panNumber;
-    private String role; // USER or OFFICER
+    private String role; 
 
-    // ✅ Getters and Setters
 
     public Long getId() {
         return id;
@@ -90,6 +89,7 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+    
 }
 
 

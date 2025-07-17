@@ -1,6 +1,11 @@
 package com.hexaware.vehicleinsurance.entity;
 
-import jakarta.persistence.*;
+import java.time.LocalDate;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Policy {
@@ -10,94 +15,46 @@ public class Policy {
     private Long id;
 
     private String policyNumber;
-    private String startDate;
-    private String endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private LocalDate createdDate;
     private double premiumAmount;
     private String status; // ACTIVE, LAPSED, CANCELLED
     private Long userId;
     private Long vehicleId;
-    private String createdDate;
     private String coverageDetails;
+    private LocalDate lastReminderSent;
 
-    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
+    public String getPolicyNumber() { return policyNumber; }
+    public void setPolicyNumber(String policyNumber) { this.policyNumber = policyNumber; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public LocalDate getStartDate() { return startDate; }
+    public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
 
-    public String getPolicyNumber() {
-        return policyNumber;
-    }
+    public LocalDate getEndDate() { return endDate; }
+    public void setEndDate(LocalDate endDate) { this.endDate = endDate; }
 
-    public void setPolicyNumber(String policyNumber) {
-        this.policyNumber = policyNumber;
-    }
+    public double getPremiumAmount() { return premiumAmount; }
+    public void setPremiumAmount(double premiumAmount) { this.premiumAmount = premiumAmount; }
 
-    public String getStartDate() {
-        return startDate;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
+    public Long getUserId() { return userId; }
+    public void setUserId(Long userId) { this.userId = userId; }
 
-    public String getEndDate() {
-        return endDate;
-    }
+    public Long getVehicleId() { return vehicleId; }
+    public void setVehicleId(Long vehicleId) { this.vehicleId = vehicleId; }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
+    public LocalDate getCreatedDate() { return createdDate; }
+    public void setCreatedDate(LocalDate createdDate) { this.createdDate = createdDate; }
 
-    public double getPremiumAmount() {
-        return premiumAmount;
-    }
+    public String getCoverageDetails() { return coverageDetails; }
+    public void setCoverageDetails(String coverageDetails) { this.coverageDetails = coverageDetails; }
 
-    public void setPremiumAmount(double premiumAmount) {
-        this.premiumAmount = premiumAmount;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getVehicleId() {
-        return vehicleId;
-    }
-
-    public void setVehicleId(Long vehicleId) {
-        this.vehicleId = vehicleId;
-    }
-
-    public String getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(String createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public String getCoverageDetails() {
-        return coverageDetails;
-    }
-
-    public void setCoverageDetails(String coverageDetails) {
-        this.coverageDetails = coverageDetails;
-    }
+    public LocalDate getLastReminderSent() { return lastReminderSent; }
+    public void setLastReminderSent(LocalDate lastReminderSent) { this.lastReminderSent = lastReminderSent; }
 }

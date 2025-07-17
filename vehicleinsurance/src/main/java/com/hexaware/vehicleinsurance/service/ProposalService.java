@@ -23,6 +23,11 @@ public class ProposalService {
     public List<Proposal> getAllProposals() {
         return proposalRepository.findAll();
     }
+    
+    public List<Proposal> getProposalsByStatus(String status) {
+        return proposalRepository.findByStatusIgnoreCase(status);
+    }
+
 
     public List<Proposal> getProposalsByUserId(Long userId) {
         return proposalRepository.findByUserId(userId);

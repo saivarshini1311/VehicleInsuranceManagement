@@ -1,25 +1,17 @@
 package com.hexaware.vehicleinsurance.service;
 
-
+import com.hexaware.vehicleinsurance.dto.VehicleDTO;
 import com.hexaware.vehicleinsurance.entity.Vehicle;
-import com.hexaware.vehicleinsurance.repository.VehicleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import java.util.*;
 
+import java.util.List;
 
-@Service
-public class VehicleService {
+public interface VehicleService {
+    Vehicle addVehicle(Vehicle vehicle);
+    Vehicle getVehicleById(Long id);
+    List<Vehicle> getVehiclesByOwnerId(Long ownerId);
+    List<Vehicle> getAllVehicles();
+    Vehicle updateVehicle(Long id, VehicleDTO dto);
+    void deleteVehicle(Long id);
+    List<VehicleDTO> getAllVehicleDetails();
 
-    @Autowired
-    private VehicleRepository vehicleRepository;
-
-    public Vehicle addVehicle(Vehicle vehicle) {
-        return vehicleRepository.save(vehicle);
-    }
-
-    public List<Vehicle> getVehiclesByOwnerId(Long userId) {
-        return vehicleRepository.findByOwnerId(userId);
-    }
 }
-

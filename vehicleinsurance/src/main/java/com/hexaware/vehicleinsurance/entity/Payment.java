@@ -5,19 +5,30 @@ import java.time.LocalDate;
 
 @Entity
 public class Payment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Double amount;
-    private String paymentMethod; // e.g., CREDIT_CARD, UPI
-    private String status; // e.g., SUCCESS, FAILED
+    private String paymentMethod; // CREDIT_CARD, UPI, etc.
+    private String status; // SUCCESS, FAILED
     private String transactionId;
     private LocalDate paymentDate;
 
-    private Long userId;
-    private Long policyId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "policy_id")
+    private Policy policy;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "quote_id")
+    private Quote quote;
+
+    // Getters & Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -36,9 +47,12 @@ public class Payment {
     public LocalDate getPaymentDate() { return paymentDate; }
     public void setPaymentDate(LocalDate paymentDate) { this.paymentDate = paymentDate; }
 
-    public Long getUserId() { return userId; }
-    public void setUserId(Long userId) { this.userId = userId; }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 
-    public Long getPolicyId() { return policyId; }
-    public void setPolicyId(Long policyId) { this.policyId = policyId; }
+    public Policy getPolicy() { return policy; }
+    public void setPolicy(Policy policy) { this.policy = policy; }
+
+    public Quote getQuote() { return quote; }
+    public void setQuote(Quote quote) { this.quote = quote; }
 }

@@ -14,13 +14,11 @@ public class UserDTO {
 
     @NotBlank
     private String password;
-
+    private String address;
     private String dob;
     private String aadharNumber;
     private String panNumber;
     private String role;
-
-    // ✅ Getters and Setters
 
     public String getName() {
         return name;
@@ -77,6 +75,16 @@ public class UserDTO {
     public void setRole(String role) {
         this.role = role;
     }
+    
+    public String getAddress() {
+    	return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }
+
+
 
 

@@ -1,36 +1,29 @@
 package com.hexaware.vehicleinsurance.service;
 
+import com.hexaware.vehicleinsurance.dto.PaymentRequest;
 import com.hexaware.vehicleinsurance.entity.Payment;
-import com.hexaware.vehicleinsurance.repository.PaymentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-@Service
-public class PaymentService {
+public interface PaymentService {
 
-    @Autowired
-    private PaymentRepository paymentRepository;
+    // Save a payment manually (used internally or admin side)
+    Payment makePayment(Payment payment);
 
-    public Payment makePayment(Payment payment) {
-        return paymentRepository.save(payment);
-    }
+    // Pay for a quote by user (main user flow)
+    ResponseEntity<String> payForQuote(Long quoteId, PaymentRequest request);
 
-    public List<Payment> getPaymentsByUser(Long userId) {
-        return paymentRepository.findByUserId(userId);
-    }
+    // Retrieve payment history by user (used in user dashboard)
+    List<Payment> getPaymentsByUser(Long userId);
 
-    public List<Payment> getPaymentsByPolicy(Long policyId) {
-        return paymentRepository.findByPolicyId(policyId);
-    }
+    // Retrieve payment history by policy (admin or backend use)
+    List<Payment> getPaymentsByPolicy(Long policyId);
 
-    public Payment getPaymentById(Long id) {
-        return paymentRepository.findById(id).orElse(null);
-    }
+    // Get a single payment by its ID
+    Payment getPaymentById(Long id);
 
-    public void deletePayment(Long id) {
-        paymentRepository.deleteById(id);
-    }
+    // Delete a payment (admin only or for cleanup)
+    void deletePayment(Long id);
 }
-

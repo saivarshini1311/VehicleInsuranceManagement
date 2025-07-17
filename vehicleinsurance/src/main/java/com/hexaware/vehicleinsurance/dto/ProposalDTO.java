@@ -9,8 +9,8 @@ public class ProposalDTO {
     private String remarks;
     private Long userId;
     private Long vehicleId;
-
-    // Getters and Setters
+    private String coverageType; 
+    private String description;
     public String getProposalNumber() {
         return proposalNumber;
     }
@@ -58,5 +58,22 @@ public class ProposalDTO {
     public void setVehicleId(Long vehicleId) {
         this.vehicleId = vehicleId;
     }
+
+	public String getCoverageType() {
+		return coverageType;
+	}
+
+	public void setCoverageType(String coverageType) {
+		this.coverageType = coverageType;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+    
 }
 

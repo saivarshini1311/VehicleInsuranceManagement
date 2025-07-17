@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface QuoteRepository extends JpaRepository<Quote, Long> {
     List<Quote> findByUserId(Long userId);
+    List<Quote> findByStatusIgnoreCase(String status);
+
 }

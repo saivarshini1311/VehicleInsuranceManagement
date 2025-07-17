@@ -14,10 +14,14 @@ public class QuoteController {
 
     @Autowired
     private QuoteService quoteService;
-
-    @PostMapping("/generate")
-    public ResponseEntity<Quote> generate(@RequestBody Quote quote) {
-        return ResponseEntity.ok(quoteService.generateQuote(quote));
+    
+    @PostMapping("/generate/{proposalId}")
+    public ResponseEntity<Quote> generateQuoteForProposal(@PathVariable Long proposalId) {
+        Quote quote = quoteService.generateQuoteForProposal(proposalId);
+        if (quote == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(quote);
     }
 
     @GetMapping("/user/{userId}")
@@ -35,16 +39,46 @@ public class QuoteController {
         return ResponseEntity.ok(quoteService.getAllQuotes());
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Quote> updateQuote(@PathVariable Long id, @RequestBody Quote quoteDetails) {
-        Quote updated = quoteService.updateQuote(id, quoteDetails);
-        if (updated != null) return ResponseEntity.ok(updated);
-        return ResponseEntity.notFound().build();
-    }
+//    @PutMapping("/{id}")
+//    public ResponseEntity<Quote> updateQuote(@PathVariable Long id, @RequestBody Quote quoteDetails) {
+//        Quote updated = quoteService.updateQuote(id, quoteDetails);
+//        if (updated != null) return ResponseEntity.ok(updated);
+//        return ResponseEntity.notFound().build();
+//    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteQuote(@PathVariable Long id) {
         quoteService.deleteQuote(id);
         return ResponseEntity.noContent().build();
     }
+    
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<Quote>> getQuotesByStatus(@PathVariable String status) {
+        List<Quote> quotes = quoteService.getQuotesByStatus(status);
+        return ResponseEntity.ok(quotes);
+    }
+    
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Quote> updateQuote(@PathVariable Long id, @RequestBody Quote quoteDetails) {
+        Quote updatedQuote = quoteService.updateQuote(id, quoteDetails);
+        if (updatedQuote != null) {
+            return ResponseEntity.ok(updatedQuote);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
+    @DeleteMapping("/cancel/{id}")
+    public ResponseEntity<Void> cancelQuote(@PathVariable Long id) {
+        Quote quote = quoteService.getQuoteById(id);
+        if (quote == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        quote.setStatus("CANCELLED");
+        quoteService.updateQuote(id, quote);
+        return ResponseEntity.noContent().build();
+    }
+
+
 }
